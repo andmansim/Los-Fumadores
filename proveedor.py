@@ -47,4 +47,7 @@ class MTCPServerHandler(socketserver.BaseRequestHandler):
             self.request.send('accepte'.encode('UTF-8'))
             self.proceso()
         else:
+            self.rejected = True
+            _print('Fumador desconectado {}'.format(store.get(self.code)['name']))
+            self.request.send('rejected'.encode('UTF-8'))
             
