@@ -39,5 +39,7 @@ def init(ip, p, c):
             _print('Rechazado')
         
         r.close()
-    except:
-        
+    except KeyboardInterrupt:
+        _print('Cerrando conexiones. . .')
+        r.send('exit'.encode('UTF-8'))
+        r.close()
