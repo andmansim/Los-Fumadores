@@ -24,4 +24,12 @@ class MTCPServerHandler(socketserver.BaseRequestHandler):
                     global smoke
                     smoke = False
                     
+            elif mensaje == 'enable':
+                _print('{}: Terminó de fumar'.format(store.get(self.code)['name']))
+                self.smoke_released = True
+            elif mensaje == 'ack':
+                time.sleep(tiempo_fumar)
+            elif mensaje == 'exit':
+                break
             
+            time.sleep(tiempo_dormir)
