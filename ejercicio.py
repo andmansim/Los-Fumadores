@@ -5,3 +5,7 @@ store = {'1':{'name': 'Papel', 'required': 'Tabaco, Fósforos, Filtros, Cerillas
          '3':{'name': 'Fósforo', 'required': 'Papel, Tabaco, Filtros, Cerillas', 'flag': False, 'request': None},
          '4':{'name': 'Filtros', 'required': 'Papel, Tabaco, Fósforos, Cerillas', 'flag': False, 'request': None},
          '5':{'name': 'Cerillas', 'required': 'Papel, Tabaco, Filtros, Fósforos', 'flag': False, 'request': None}}
+
+tiempo_fumar = 5
+tiempo_dormir = 1
+tamanio = 1024
