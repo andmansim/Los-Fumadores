@@ -56,4 +56,11 @@ class MTCPServerHandler(socketserver.BaseRequestHandler):
         if self.rejected is False:
             store.get(self.code)['flag'] = False
         global smoke_code
-        if smoke_code 
+        if smoke_code == self.code:
+            global smoke 
+            smoke = False
+    
+    def handle_timeout(self):
+        print('Tiempo de espera agotado')
+        
+    
