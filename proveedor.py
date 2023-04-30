@@ -48,6 +48,12 @@ class MTCPServerHandler(socketserver.BaseRequestHandler):
             self.proceso()
         else:
             self.rejected = True
-            _print('Fumador desconectado {}'.format(store.get(self.code)['name']))
+            _print('Fumador rechazado {}'.format(store.get(self.code)['name']))
             self.request.send('rejected'.encode('UTF-8'))
-            
+    
+    def terminar (self):
+        _print('Fumador desconectado {}'.format(store.get(self.code)['name']))
+        if self.rejected is False:
+            store.get(self.code)['flag'] = False
+        global smoke_code
+        if smoke_code 
