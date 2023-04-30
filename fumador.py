@@ -24,4 +24,20 @@ def proceso(c, r):
             pass
         
         time.sleep(tiempo_dormir)
-            
+
+def init(ip, p, c):
+    try:
+        r = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        r.connect((ip, p))
+        r.send('{}'.format(c).encode('UTF-8'))
+        time.sleep(tiempo_dormir)
+        
+        e = r.recv(tamanio).decode('UTF-8')
+        if e =='accepte':
+            proceso(c, r)
+        else: 
+            _print('Rechazado')
+        
+        r.close()
+    except:
+        
