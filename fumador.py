@@ -13,4 +13,15 @@ def proceso(c, r):
         mensaje = r.recv(tamanio).decode('UTF-8')
         if mensaje == 'enable':
             _print('Servido!')
+            time.sleep(tiempo_dormir)
+            r.send('ack'.encode('UTF-8'))   
+            _print('Haciendo cigarro')
+            time.sleep(tiempo_dormir)
+            _print('Fumando')
+            time.sleep(tiempo_fumar)
+            r.send('enable'.encode('UTF-8'))   
+        elif mensaje =='ack':
+            pass
+        
+        time.sleep(tiempo_dormir)
             
