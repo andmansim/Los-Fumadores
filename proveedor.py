@@ -76,7 +76,7 @@ def verificar():
             break
         else:
             if activo is False:
-                _print('Proveedor esperando a tosos los fumadores')
+                _print('Proveedor esperando a todos los fumadores')
 
 def init (port):
     try: 
