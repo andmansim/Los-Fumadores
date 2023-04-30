@@ -33,3 +33,18 @@ class MTCPServerHandler(socketserver.BaseRequestHandler):
                 break
             
             time.sleep(tiempo_dormir)
+        
+    def handle(self):
+        #proceso de reconocimiento
+        self.code = self.request.recv(tamanio).decode('UTF-8')
+        self.rejected = False
+        self.smoke_released = False
+        _print('Conectando fumador . . . ')
+        if store.get(self.code)['flag'] is False:
+            store.get(self.code)['request'] = self.request
+            store.get(self.code)['flag'] = True
+            _print('Fumador aceptado {}'.format(store.get(self.code)['name']))
+            self.request.send('accepte'.encode('UTF-8'))
+            self.proceso()
+        else:
+            
