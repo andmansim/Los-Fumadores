@@ -32,10 +32,10 @@ if __name__ == '__main__':
             for i in codes:
                 print('{}. {}'.format(i, store[i].get('name')))
                 type = input('Opción: ')
-                if type in codes:
-                    break
-                else: 
-                    os.system('clear')
+            if type in codes:
+                break
+            else: 
+                os.system('clear')
                     
         ip = input('Ip del agente: ')
         from fumador import init
