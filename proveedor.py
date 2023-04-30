@@ -89,3 +89,15 @@ def init (port):
         server_thread.start()
         
         while True:
+            verificar()
+            global smoke_code 
+            smoke_code = choice(codes)
+            _print('Poveedor: Está disponible {}'.format(store.get(smoke_code)['required']))
+            global smoke
+            smoke = True
+            store.get(smoke_code)['request'].send('enable'.encode('UTF-8'))
+            _print('Poveedor: fumador {} servido'.format(store.get(smoke_code)['name']))
+    except KeyboardInterrupt:
+        _print('Cerrando conexiones . . .')
+        server.shutdown()
+        server.server_close()
