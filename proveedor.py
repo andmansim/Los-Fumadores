@@ -12,7 +12,7 @@ global smoke_code
 class MyTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
     pass
 
-class MTCPServerHandler(socketserver.BaseRequestHandler):
+class MyTCPServerHandler(socketserver.BaseRequestHandler):
     bufer = ''
     def proceso(self):
         while True:
@@ -77,4 +77,15 @@ def verificar():
         else:
             if activo is False:
                 _print('Proveedor esperando a tosos los fumadores')
-                
+
+def init (port):
+    try: 
+        server = MyTCPServer(('0.0.0.0', port), MyTCPServerHandler)
+        server.timeout = 10
+        server_thread = threading.Thread(target=server.serve_forever)
+        server_thread.timeout = 10
+        _print('Esperando fumadores . . . ')
+        server_thread.daemon = True
+        server_thread.start()
+        
+        while True:
