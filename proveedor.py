@@ -63,4 +63,18 @@ class MTCPServerHandler(socketserver.BaseRequestHandler):
     def handle_timeout(self):
         print('Tiempo de espera agotado')
         
-    
+def verificar():
+    #se verifica si están todos los fumadores conectados 
+    while True:
+        activo = True
+        for i in codes:
+            if store[i].get('flag') is False:
+                activo = False
+                break
+        time.sleep(tiempo_dormir)
+        if activo and smoke is False:
+            break
+        else:
+            if activo is False:
+                _print('Proveedor esperando a tosos los fumadores')
+                
