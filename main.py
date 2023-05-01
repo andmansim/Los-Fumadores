@@ -2,7 +2,7 @@ import os
 
 from almacenar import codes, store
 
-def get_port():
+def get_port():#Puerto del servidor
     while True:
         try:
             port = int(input('Puerto (1024 - 49151): '))
@@ -13,6 +13,9 @@ def get_port():
     return port
 
 if __name__ == '__main__':
+    '''
+    Conecta todo y lo pone bonito
+    '''
     os.system('cls')
     while True:
         print('1. Proveedor')
@@ -20,10 +23,12 @@ if __name__ == '__main__':
         type = input ('Opción: ')
         if type in ['1', '2']:
             break
-        else: os.system ('cear')
+        else: os.system ('cls')
+        
     os.system('cls')
+    
     if type == '1':
-        print('Poveedor')
+        print('Proveedor')
         from proveedor import init
         init(get_port())
     else: 
@@ -37,7 +42,7 @@ if __name__ == '__main__':
             else: 
                 os.system('cls')
                     
-        ip = input('Ip del agente: ')
+        ip = input('Ip del proveedor: ')
         from fumador import init
         init(ip, get_port(), type)
         
