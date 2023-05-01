@@ -4,14 +4,17 @@ from almacenar import tamanio, store, tiempo_fumar, tiempo_dormir
 from utils import _print
 
 def proceso(c, r):
-    mensaje = ''
+    '''
+    Se encarga de mandar mensajes entre el proveedor y el fumador para conectarlos y ver si están listos para empezar
+    '''
+    mensaje = '' #El mensaje q se va a ir cambiando
     while True:
-        if mensaje != 'ack':
+        if mensaje != 'ack':#Esperamos a que nos llegue el recurso que necesitamos 
             _print('Esperando {}!'.format(store.get(c)['required']))
-            r.send('need'.encode('UTF-8'))
+            r.send('need'.encode('UTF-8'))#Envíamos el pedido
         
-        mensaje = r.recv(tamanio).decode('UTF-8')
-        if mensaje == 'enable':
+        mensaje = r.recv(tamanio).decode('UTF-8')#Respuesta del servidor
+        if mensaje == 'enable':#Hemos recibido el mensaje y preparamos todo para fumar
             _print('Servido!')
             time.sleep(tiempo_dormir)
             r.send('ack'.encode('UTF-8'))   
@@ -26,20 +29,23 @@ def proceso(c, r):
         time.sleep(tiempo_dormir)
 
 def init(ip, p, c):
+    '''
+    Se encarga de comunicarse con el sevidor
+    '''
     try:
-        r = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        r.connect((ip, p))
-        r.send('{}'.format(c).encode('UTF-8'))
+        conexion = socket.socket(socket.AF_INET, socket.SOCK_STREAM)#creamos la conexión
+        conexion.connect((ip, p))#nos conectamos a la ip y el servidor
+        conexion.send('{}'.format(c).encode('UTF-8'))#enviamo la petición
         time.sleep(tiempo_dormir)
         
-        e = r.recv(tamanio).decode('UTF-8')
-        if e =='accepte':
-            proceso(c, r)
+        respuesta = conexion.recv(tamanio).decode('UTF-8')#respuesta
+        if respuesta =='accepte':
+            proceso(c, conexion)#ejecutamos proceso, es decir, intercambian mensajes
         else: 
             _print('Rechazado')
         
-        r.close()
+        conexion.close()
     except KeyboardInterrupt:
         _print('Cerrando conexiones. . .')
-        r.send('exit'.encode('UTF-8'))
-        r.close()
+        conexion.send('exit'.encode('UTF-8'))
+        conexion.close()

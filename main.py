@@ -13,7 +13,7 @@ def get_port():
     return port
 
 if __name__ == '__main__':
-    os.system('clear')
+    os.system('cls')
     while True:
         print('1. Proveedor')
         print('2. Fumador')
@@ -21,7 +21,7 @@ if __name__ == '__main__':
         if type in ['1', '2']:
             break
         else: os.system ('cear')
-    os.system('clear')
+    os.system('cls')
     if type == '1':
         print('Poveedor')
         from proveedor import init
@@ -35,7 +35,7 @@ if __name__ == '__main__':
             if type in codes:
                 break
             else: 
-                os.system('clear')
+                os.system('cls')
                     
         ip = input('Ip del agente: ')
         from fumador import init
